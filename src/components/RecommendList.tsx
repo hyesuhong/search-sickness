@@ -1,4 +1,4 @@
-import {styled} from 'styled-components';
+import * as S from '../styles/SearchList.styled';
 import SearchItem from './SearchItem';
 
 interface Props {
@@ -8,9 +8,9 @@ interface Props {
 const RecommendList = ({list}: Props) => {
 	return (
 		<>
-			<RecommendListContainer>
-				<p>추천 검색어</p>
-				{list && (
+			<S.Container>
+				<S.Subtitle>추천 검색어</S.Subtitle>
+				{list ? (
 					<ul>
 						{list.map((item, index) => (
 							<li key={`recommend_${index}`}>
@@ -18,20 +18,12 @@ const RecommendList = ({list}: Props) => {
 							</li>
 						))}
 					</ul>
+				) : (
+					<S.emptyText>추천 검색어가 없습니다</S.emptyText>
 				)}
-			</RecommendListContainer>
+			</S.Container>
 		</>
 	);
 };
-
-const RecommendListContainer = styled.div`
-	p {
-		padding: 0 24px;
-		color: ${props => props.theme.blueGrey};
-		font-size: 13px;
-		letter-spacing: -0.018em;
-		line-height: 1.6;
-	}
-`;
 
 export default RecommendList;
