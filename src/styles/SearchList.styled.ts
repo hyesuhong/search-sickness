@@ -24,4 +24,5 @@ export const emptyText = styled.p`
 	letter-spacing: -0.018em;
 	line-height: 1.6;
 	margin-top: 16px;
+	padding: 0 24px;
 `;
