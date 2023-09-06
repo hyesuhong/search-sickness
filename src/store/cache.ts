@@ -9,26 +9,33 @@ export default class CacheStore {
 	}
 
 	async open() {
-		const casheStore = await caches.open(this.storeName);
-		return casheStore;
+		const cacheStore = await caches.open(this.storeName);
+		return cacheStore;
 	}
 
 	async match(url: string) {
-		const casheStore = await this.open();
+		const cacheStore = await this.open();
 
-		const cacheResponse = await casheStore.match(url);
+		const cacheResponse = await cacheStore.match(url);
 		if (!cacheResponse) return cacheResponse;
 
 		const isExpired = this.isExpired(cacheResponse);
 		if (isExpired) {
-			await this.delete(casheStore, url);
+			await this.delete(cacheStore, url);
 			return undefined;
 		}
 
 		return await cacheResponse.json();
 	}
 
-	async add(response: Response) {
+	async put(url: string, response: Response) {
+		const cacheStore = await this.open();
+		const newRes = await this.createResponseWithDate(response);
+
+		cacheStore.put(url, newRes);
+	}
+
+	private async createResponseWithDate(response: Response) {
 		const resClone = response.clone();
 		const resBody = await resClone.blob();
 		const resHeaders = new Headers(resClone.headers);
@@ -50,7 +57,7 @@ export default class CacheStore {
 		return today - cachedMS > this.cacheTime;
 	}
 
-	private async delete(casheStore: Cache, url: string) {
-		return await casheStore.delete(url);
+	private async delete(cacheStore: Cache, url: string) {
+		return await cacheStore.delete(url);
 	}
 }
