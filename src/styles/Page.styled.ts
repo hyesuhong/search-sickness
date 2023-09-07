@@ -24,9 +24,17 @@ export const FormContainer = styled.div`
 	width: 100%;
 	max-width: 490px;
 	height: 75px;
+
+	&:has(input:focus) {
+		& > div {
+			display: block;
+		}
+	}
 `;
 
 export const SuggestionContainer = styled.div`
+	display: none;
+
 	position: absolute;
 	top: calc(100% + 8px);
 	left: 0;

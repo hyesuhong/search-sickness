@@ -36,15 +36,17 @@ export const Form = styled.form`
 		&::before {
 			display: none;
 		}
-
-		button[type='reset'] {
-			display: block;
-		}
 	}
 
 	&:has(input:valid) {
 		&::before {
 			display: none;
+		}
+	}
+
+	&:has(input:valid:focus) {
+		button[type='reset'] {
+			display: block;
 		}
 	}
 `;
