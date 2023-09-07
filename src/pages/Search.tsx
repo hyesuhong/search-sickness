@@ -1,13 +1,16 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import * as S from '../styles/Page.styled';
 import RecommendList from '../components/RecommendList';
 import SearchForm from '../components/SearchForm';
 import useDebounce from '../hooks/useDebounce';
+import useFetchSick from '../hooks/useFetchSick';
 
 const Search = () => {
 	const [keyword, setKeyword] = useState('');
 
 	const debouncedKeyword = useDebounce(keyword, 200);
+
+	const result = useFetchSick(debouncedKeyword);
 
 	const changeInput = (ev: React.ChangeEvent<HTMLInputElement>) => {
 		const {
@@ -21,6 +24,11 @@ const Search = () => {
 
 		console.info('search', debouncedKeyword);
 	};
+
+	useEffect(() => {
+		if (debouncedKeyword === '') return;
+		console.info(debouncedKeyword, result);
+	}, [debouncedKeyword]);
 
 	return (
 		<>
