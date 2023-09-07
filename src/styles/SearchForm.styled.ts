@@ -41,6 +41,12 @@ export const Form = styled.form`
 			display: block;
 		}
 	}
+
+	&:has(input:valid) {
+		&::before {
+			display: none;
+		}
+	}
 `;
 
 export const Input = styled.input`
