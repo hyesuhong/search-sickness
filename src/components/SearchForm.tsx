@@ -22,7 +22,6 @@ const SearchForm = ({input, submitHandler}: Props) => {
 				onKeyDown={input.keyboardHandler}
 				onBlur={input.blurHandler}
 			/>
-			<S.Button type='reset' />
 			<S.Button type='submit' />
 		</S.Form>
 	);

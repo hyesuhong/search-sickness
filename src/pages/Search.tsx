@@ -44,7 +44,11 @@ const Search = () => {
 	const searchSick = (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 
-		console.info('search', keyword);
+		if (result && index > -1) {
+			console.info('search by recommendation', result[index]);
+		} else {
+			console.info('search by input', keyword);
+		}
 	};
 
 	useEffect(() => {
@@ -52,10 +56,6 @@ const Search = () => {
 			changeIndex({type: 'init'});
 		}
 	}, [result]);
-
-	useEffect(() => {
-		console.info(index);
-	}, [index]);
 
 	return (
 		<>
