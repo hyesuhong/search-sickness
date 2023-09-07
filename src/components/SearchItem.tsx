@@ -12,7 +12,7 @@ const SearchItem = memo(({children, selected = false}: Props) => {
 		<>
 			<StyleSheetManager>
 				<S.ItemContainer $selected={selected}>
-					<p>{children}</p>
+					<span>{children}</span>
 				</S.ItemContainer>
 			</StyleSheetManager>
 		</>

@@ -1,7 +1,7 @@
 import {styled} from 'styled-components';
 import IcoSearch from '../assets/ico_search.svg';
 
-export const ItemContainer = styled.div<{$selected: boolean}>`
+export const ItemContainer = styled.p<{$selected: boolean}>`
 	display: flex;
 	align-items: center;
 	padding: 8px 24px;
@@ -25,14 +25,14 @@ export const ItemContainer = styled.div<{$selected: boolean}>`
 
 	background-color: ${props => (props.$selected ? props.theme.icyGrey : 'transparent')};
 
-	p {
+	span {
 		white-space: nowrap;
 		min-width: 0;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 
-	span {
+	strong {
 		font-weight: 700;
 	}
 `;
