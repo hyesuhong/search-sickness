@@ -1,7 +1,7 @@
 import {styled} from 'styled-components';
 import IcoSearch from '../assets/ico_search.svg';
 
-export const ItemContainer = styled.div`
+export const ItemContainer = styled.div<{$selected: boolean}>`
 	display: flex;
 	align-items: center;
 	padding: 8px 24px;
@@ -23,9 +23,7 @@ export const ItemContainer = styled.div`
 		-webkit-mask-size: cover;
 	}
 
-	&[area-selected='true'] {
-		background-color: ${props => props.theme.icyGrey};
-	}
+	background-color: ${props => (props.$selected ? props.theme.icyGrey : 'transparent')};
 
 	p {
 		white-space: nowrap;

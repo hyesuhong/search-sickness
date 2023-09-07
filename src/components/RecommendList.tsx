@@ -26,7 +26,7 @@ const RecommendList = memo(({list, keyword, targetIndex}: Props) => {
 							// console.info(index, index === targetIndex);
 							return (
 								<li key={`recommend_${sickCd}_${index}`}>
-									<SearchItem area-selected={(index === targetIndex).toString()}>
+									<SearchItem selected={index === targetIndex}>
 										{forwardName}
 										<span>{match}</span>
 										{backwardName}

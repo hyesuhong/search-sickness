@@ -45,9 +45,9 @@ const Search = () => {
 		ev.preventDefault();
 
 		if (result && index > -1) {
-			console.info('search by recommendation', result[index]);
+			console.info(`search by recommendation: ${result[index].sickNm}`);
 		} else {
-			console.info('search by input', keyword);
+			console.info(`search by input: ${keyword}`);
 		}
 	};
 
