@@ -27,6 +27,13 @@ export const ItemContainer = styled.div`
 		background-color: ${props => props.theme.icyGrey};
 	}
 
+	p {
+		white-space: nowrap;
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
 	span {
 		font-weight: 700;
 	}
