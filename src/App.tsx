@@ -5,11 +5,9 @@ import Search from './pages/Search';
 import CacheStore from './store/cache';
 import Api from './service/api';
 import ApiProvider from './context/ApiContext';
+import {BASE_URL, EXPIRE_TIME, STORAGE_NAME} from './constants/config';
 
-const EXPIRE_TIME = 1000 * 60;
-const cacheStorage = new CacheStore('test_1', EXPIRE_TIME);
-
-const BASE_URL = 'http://localhost:4000/';
+const cacheStorage = new CacheStore(STORAGE_NAME, EXPIRE_TIME);
 const api = new Api(BASE_URL, cacheStorage);
 
 const App = () => {

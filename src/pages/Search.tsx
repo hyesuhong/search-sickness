@@ -5,10 +5,11 @@ import SearchForm from '../components/SearchForm';
 import useDebounce from '../hooks/useDebounce';
 import useFetchSick from '../hooks/useFetchSick';
 import useIndexChange from '../hooks/useIndexChange';
+import {DEBOUNCE_DELAY_TIME} from '../constants/config';
 
 const Search = () => {
 	const [keyword, setKeyword] = useState('');
-	const debouncedKeyword = useDebounce(keyword, 200);
+	const debouncedKeyword = useDebounce(keyword, DEBOUNCE_DELAY_TIME);
 	const result = useFetchSick(debouncedKeyword);
 	const {index, changeIndex} = useIndexChange(result && result.length);
 

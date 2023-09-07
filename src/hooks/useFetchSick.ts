@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useApi} from '../context/ApiContext';
 import {sick} from '../types/sick';
+import {RESULT_MAX_LEN} from '../constants/config';
 
 const useFetchSick = (keyword: string) => {
 	const [result, setResult] = useState<sick[]>();
@@ -22,10 +23,10 @@ const useFetchSick = (keyword: string) => {
 					const regExp = new RegExp(keyword, 'gi');
 					const filteredList = res.filter((data: sick) => data.sickNm.match(regExp));
 
-					setResult(filteredList.slice(0, 7));
+					setResult(filteredList.slice(0, RESULT_MAX_LEN));
 					return;
 				}
-				setResult(res.slice(0, 7));
+				setResult(res.slice(0, RESULT_MAX_LEN));
 			})
 			.catch(e => console.error(e));
 	}, [getData, keyword]);
