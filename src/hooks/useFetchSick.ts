@@ -19,7 +19,7 @@ const useFetchSick = (keyword: string) => {
 		getData(url, query)
 			.then(res => {
 				console.info(res);
-				setResult(res);
+				setResult(res.slice(0, 7));
 			})
 			.catch(e => console.error(e));
 	}, [getData, keyword]);

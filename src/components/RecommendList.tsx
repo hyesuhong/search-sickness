@@ -9,16 +9,15 @@ interface Props {
 }
 
 const RecommendList = memo(({list, keyword}: Props) => {
-	const viewList = list?.slice(0, 7);
 	const completedKeyword = keyword.replace(/[ㄱ-ㅎ]|[ㅏ-ㅣ]/gi, '');
 
 	return (
 		<>
 			<S.Container>
 				<S.Subtitle>추천 검색어</S.Subtitle>
-				{viewList && viewList.length > 0 ? (
+				{list && list.length > 0 ? (
 					<ul>
-						{viewList.map(({sickCd, sickNm}, index) => {
+						{list.map(({sickCd, sickNm}, index) => {
 							const idx = sickNm.indexOf(completedKeyword);
 							const forwardName = sickNm.slice(0, idx);
 							const backwardName = sickNm.slice(idx + completedKeyword.length);
