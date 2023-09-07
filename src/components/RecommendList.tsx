@@ -19,7 +19,8 @@ const RecommendList = memo(({list, keyword, targetIndex}: Props) => {
 				{list && list.length > 0 ? (
 					<ul>
 						{list.map(({sickCd, sickNm}, index) => {
-							const idx = sickNm.indexOf(completedKeyword);
+							const match = sickNm.match(new RegExp(completedKeyword, 'i'));
+							const idx = match && match.index ? match.index : 0;
 							const forwardName = sickNm.slice(0, idx);
 							const backwardName = sickNm.slice(idx + completedKeyword.length);
 							// console.info(index, index === targetIndex);
@@ -27,7 +28,7 @@ const RecommendList = memo(({list, keyword, targetIndex}: Props) => {
 								<li key={`recommend_${sickCd}_${index}`}>
 									<SearchItem area-selected={(index === targetIndex).toString()}>
 										{forwardName}
-										<span>{completedKeyword}</span>
+										<span>{match}</span>
 										{backwardName}
 									</SearchItem>
 								</li>

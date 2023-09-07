@@ -18,7 +18,13 @@ const useFetchSick = (keyword: string) => {
 
 		getData(url, query)
 			.then(res => {
-				console.info(res);
+				if (keyword.length === 1 && keyword.match(/^[a-z]/i)) {
+					const regExp = new RegExp(keyword, 'gi');
+					const filteredList = res.filter((data: sick) => data.sickNm.match(regExp));
+
+					setResult(filteredList.slice(0, 7));
+					return;
+				}
 				setResult(res.slice(0, 7));
 			})
 			.catch(e => console.error(e));
