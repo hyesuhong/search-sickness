@@ -30,6 +30,8 @@ export default class Api {
 	private async getApiData(url: string) {
 		const res = await fetch(url);
 
+		console.info('calling api');
+
 		if (this.cacheStorage) {
 			const cloneRes = res.clone();
 			this.cacheStorage.put(url, cloneRes);
