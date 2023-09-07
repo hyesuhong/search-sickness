@@ -23,7 +23,7 @@ export const ItemContainer = styled.div`
 		-webkit-mask-size: cover;
 	}
 
-	&:hover {
+	&[area-selected='true'] {
 		background-color: ${props => props.theme.icyGrey};
 	}
 

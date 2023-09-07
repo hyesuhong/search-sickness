@@ -4,13 +4,13 @@ import RecommendList from '../components/RecommendList';
 import SearchForm from '../components/SearchForm';
 import useDebounce from '../hooks/useDebounce';
 import useFetchSick from '../hooks/useFetchSick';
+import useIndexChange from '../hooks/useIndexChange';
 
 const Search = () => {
 	const [keyword, setKeyword] = useState('');
-
 	const debouncedKeyword = useDebounce(keyword, 200);
-
 	const result = useFetchSick(debouncedKeyword);
+	const {index, changeIndex} = useIndexChange(result && result.length);
 
 	const changeInput = (ev: React.ChangeEvent<HTMLInputElement>) => {
 		const {
@@ -19,16 +19,43 @@ const Search = () => {
 		setKeyword(value);
 	};
 
+	const keyDownInput = (ev: React.KeyboardEvent<HTMLInputElement>) => {
+		const {key} = ev;
+
+		if (key === 'ArrowDown' || key === 'ArrowUp') {
+			ev.preventDefault();
+
+			if (!result || result.length < 1) {
+				return;
+			}
+
+			if (key === 'ArrowDown') {
+				changeIndex({type: 'increase'});
+			} else {
+				changeIndex({type: 'decrease'});
+			}
+		}
+	};
+
+	const blurInput = (ev: React.FocusEvent<HTMLInputElement>) => {
+		changeIndex({type: 'init'});
+	};
+
 	const searchSick = (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 
-		console.info('search', debouncedKeyword);
+		console.info('search', keyword);
 	};
 
 	useEffect(() => {
-		if (debouncedKeyword === '') return;
-		console.info(debouncedKeyword, result);
-	}, [debouncedKeyword]);
+		if (!result || result.length < 1) {
+			changeIndex({type: 'init'});
+		}
+	}, [result]);
+
+	useEffect(() => {
+		console.info(index);
+	}, [index]);
 
 	return (
 		<>
@@ -40,11 +67,16 @@ const Search = () => {
 				</S.Title>
 				<S.FormContainer>
 					<SearchForm
-						input={{value: keyword, changeHandler: changeInput}}
+						input={{
+							value: keyword,
+							changeHandler: changeInput,
+							keyboardHandler: keyDownInput,
+							blurHandler: blurInput,
+						}}
 						submitHandler={searchSick}
 					/>
 					<S.SuggestionContainer>
-						<RecommendList list={result} keyword={debouncedKeyword} />
+						<RecommendList list={result} keyword={debouncedKeyword} targetIndex={index} />
 					</S.SuggestionContainer>
 				</S.FormContainer>
 			</S.Wrapper>

@@ -6,9 +6,10 @@ import SearchItem from './SearchItem';
 interface Props {
 	list?: sick[];
 	keyword: string;
+	targetIndex: number;
 }
 
-const RecommendList = memo(({list, keyword}: Props) => {
+const RecommendList = memo(({list, keyword, targetIndex}: Props) => {
 	const completedKeyword = keyword.replace(/[ㄱ-ㅎ]|[ㅏ-ㅣ]/gi, '');
 
 	return (
@@ -21,10 +22,10 @@ const RecommendList = memo(({list, keyword}: Props) => {
 							const idx = sickNm.indexOf(completedKeyword);
 							const forwardName = sickNm.slice(0, idx);
 							const backwardName = sickNm.slice(idx + completedKeyword.length);
-
+							// console.info(index, index === targetIndex);
 							return (
 								<li key={`recommend_${sickCd}_${index}`}>
-									<SearchItem>
+									<SearchItem area-selected={(index === targetIndex).toString()}>
 										{forwardName}
 										<span>{completedKeyword}</span>
 										{backwardName}

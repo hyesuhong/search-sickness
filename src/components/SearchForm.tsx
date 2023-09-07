@@ -4,6 +4,8 @@ interface Props {
 	input: {
 		value: string;
 		changeHandler: (ev: React.ChangeEvent<HTMLInputElement>) => void;
+		keyboardHandler: (ev: React.KeyboardEvent<HTMLInputElement>) => void;
+		blurHandler: (ev: React.FocusEvent<HTMLInputElement>) => void;
 	};
 	submitHandler: (ev: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -17,6 +19,8 @@ const SearchForm = ({input, submitHandler}: Props) => {
 				required
 				value={input.value}
 				onChange={input.changeHandler}
+				onKeyDown={input.keyboardHandler}
+				onBlur={input.blurHandler}
 			/>
 			<S.Button type='reset' />
 			<S.Button type='submit' />
