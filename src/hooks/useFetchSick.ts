@@ -8,7 +8,7 @@ const useFetchSick = (keyword: string) => {
 	const {getData} = useApi();
 
 	useEffect(() => {
-		if (!getData || keyword === '') return;
+		if (!getData || keyword === '') return setResult([]);
 
 		const checkIncompletedKorean = keyword.match(/[ㄱ-ㅎ]|[ㅏ-ㅣ]/gi);
 		if (checkIncompletedKorean) return;

@@ -1,13 +1,16 @@
+import {ReactNode} from 'react';
 import * as S from '../styles/SearchItem.styled';
 
 interface Props {
-	children: string;
+	children: ReactNode;
 }
 
 const SearchItem = ({children}: Props) => {
 	return (
 		<>
-			<S.ItemContainer dangerouslySetInnerHTML={{__html: children}}></S.ItemContainer>
+			<S.ItemContainer>
+				<p>{children}</p>
+			</S.ItemContainer>
 		</>
 	);
 };

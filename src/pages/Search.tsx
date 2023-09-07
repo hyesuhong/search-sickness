@@ -44,7 +44,7 @@ const Search = () => {
 						submitHandler={searchSick}
 					/>
 					<S.SuggestionContainer>
-						<RecommendList />
+						<RecommendList list={result} keyword={debouncedKeyword} />
 					</S.SuggestionContainer>
 				</S.FormContainer>
 			</S.Wrapper>
