@@ -18,9 +18,7 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start:front": "react-scripts start",
-		"start:back": "json-server --watch db.json --port=4000",
-		"start": "concurrently \"npm run start:front\" \"npm run start:back\"",
+		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"postinstall": "husky install",
 		"format": "prettier --cache --write .",
@@ -48,11 +46,9 @@
 		]
 	},
 	"devDependencies": {
-		"concurrently": "^8.2.1",
 		"eslint": "^8.48.0",
 		"eslint-config-prettier": "^9.0.0",
 		"husky": "^8.0.3",
-		"json-server": "^0.17.3",
 		"lint-staged": "^14.0.1",
 		"prettier": "^3.0.3"
 	}
