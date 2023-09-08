@@ -8,7 +8,7 @@
 
 [**배포 링크**](https://soft-biscuit-866fba.netlify.app/)
 
-<!-- 이미지 위치 -->
+<img src="https://github.com/hyesuhong/wanted-pre-onboarding-week-3/assets/70276660/21605e7b-4d00-46d2-b5b7-04dffd8e89b2" alt="preview" width="400"/>
 
 ## 시작 가이드
 
