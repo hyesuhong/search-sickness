@@ -1,5 +1,6 @@
 import {ReactNode, createContext, useCallback, useContext, useMemo} from 'react';
 import Api from '../service/api';
+import {sick} from '../types/sick';
 
 type Obj = {[key: string]: string};
 
@@ -9,7 +10,7 @@ interface Props {
 }
 
 interface Value {
-	getData?: (url: string, querys?: Obj) => Promise<any>;
+	getData?: (url: string, querys?: Obj) => Promise<sick[]>;
 }
 
 const ApiContext = createContext<Value>({});
