@@ -10,8 +10,8 @@ import {DEBOUNCE_DELAY_TIME} from '../constants/config';
 const Search = () => {
 	const [keyword, setKeyword] = useState('');
 	const debouncedKeyword = useDebounce(keyword, DEBOUNCE_DELAY_TIME);
-	const result = useFetchSick(debouncedKeyword);
-	const {index, changeIndex} = useIndexChange(result && result.length);
+	const {data} = useFetchSick(debouncedKeyword);
+	const {index, changeIndex} = useIndexChange(data && data.length);
 
 	const changeInput = (ev: React.ChangeEvent<HTMLInputElement>) => {
 		const {
@@ -22,11 +22,10 @@ const Search = () => {
 
 	const keyDownInput = (ev: React.KeyboardEvent<HTMLInputElement>) => {
 		const {key} = ev;
-
 		if (key === 'ArrowDown' || key === 'ArrowUp') {
 			ev.preventDefault();
 
-			if (!result || result.length < 1) {
+			if (!data || data.length < 1 || ev.nativeEvent.isComposing) {
 				return;
 			}
 
@@ -38,25 +37,25 @@ const Search = () => {
 		}
 	};
 
-	const blurInput = (ev: React.FocusEvent<HTMLInputElement>) => {
+	const blurInput = () => {
 		changeIndex({type: 'init'});
 	};
 
 	const searchSick = (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 
-		if (result && index > -1) {
-			console.info(`search by recommendation: ${result[index].sickNm}`);
+		if (data && index > -1) {
+			alert(`search by recommendation: ${data[index].sickNm}`);
 		} else {
-			console.info(`search by input: ${keyword}`);
+			alert(`search by input: ${keyword}`);
 		}
 	};
 
 	useEffect(() => {
-		if (!result || result.length < 1) {
+		if (!data || data.length < 1) {
 			changeIndex({type: 'init'});
 		}
-	}, [result]);
+	}, [data]);
 
 	return (
 		<>
@@ -77,7 +76,7 @@ const Search = () => {
 						submitHandler={searchSick}
 					/>
 					<S.SuggestionContainer>
-						<RecommendList list={result} keyword={debouncedKeyword} targetIndex={index} />
+						<RecommendList list={data} keyword={debouncedKeyword} targetIndex={index} />
 					</S.SuggestionContainer>
 				</S.FormContainer>
 			</S.Wrapper>
