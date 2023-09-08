@@ -10,6 +10,7 @@ interface Props {
 }
 
 const RecommendList = memo(({list, keyword, targetIndex}: Props) => {
+	const keywordRegexp = new RegExp(keyword, 'i');
 	return (
 		<>
 			<S.Container>
@@ -17,12 +18,14 @@ const RecommendList = memo(({list, keyword, targetIndex}: Props) => {
 				{list && list.length > 0 ? (
 					<ul>
 						{list.map(({sickCd, sickNm}, index) => {
-							const splitedName = sickNm.split(keyword);
+							const splitedName = sickNm.split(keywordRegexp);
+							const machedChar = sickNm.match(keywordRegexp);
+
 							return (
 								<li key={`recommend_${sickCd}_${index}`}>
 									<SearchItem selected={index === targetIndex}>
 										{splitedName[0]}
-										<strong>{keyword}</strong>
+										<strong>{machedChar}</strong>
 										{splitedName[1]}
 									</SearchItem>
 								</li>
