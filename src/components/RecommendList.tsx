@@ -10,7 +10,9 @@ interface Props {
 }
 
 const RecommendList = memo(({list, keyword, targetIndex}: Props) => {
-	const keywordRegexp = new RegExp(keyword, 'i');
+	const keywordClean = keyword.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
+	const keywordRegexp = new RegExp(keywordClean, 'i');
+
 	return (
 		<>
 			<S.Container>
