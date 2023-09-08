@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import * as S from '../styles/Page.styled';
 import RecommendList from '../components/RecommendList';
 import SearchForm from '../components/SearchForm';
@@ -50,12 +50,6 @@ const Search = () => {
 			alert(`search by input: ${keyword}`);
 		}
 	};
-
-	useEffect(() => {
-		if (!data || data.length < 1) {
-			changeIndex({type: 'init'});
-		}
-	}, [data]);
 
 	return (
 		<>

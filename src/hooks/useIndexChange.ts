@@ -1,4 +1,4 @@
-import {Reducer, useReducer} from 'react';
+import {Reducer, useEffect, useReducer} from 'react';
 
 type reducerAction = {
 	type: 'increase' | 'decrease' | 'init';
@@ -19,6 +19,11 @@ const useIndexChange = (max?: number) => {
 	};
 
 	const [index, changeIndex] = useReducer(indexReducer, -1);
+
+	useEffect(() => {
+		changeIndex({type: 'init'});
+	}, [max]);
+
 	return {index, changeIndex};
 };
 
